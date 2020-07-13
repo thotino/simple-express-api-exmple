@@ -30,4 +30,4 @@ npm start
 This server is listening on the port 3001.
 
 # REFERENCE
-To build this project, we followed this (tutorial)[https://auth0.com/blog/node-js-and-express-tutorial-building-and-securing-restful-apis/]
+To build this project, we followed this [tutorial](https://auth0.com/blog/node-js-and-express-tutorial-building-and-securing-restful-apis/)
