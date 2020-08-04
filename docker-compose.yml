@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+ ads-app:
+  image: node:14-alpine
+  build: .
+  command: sh -c "cd ads-app && npm install && npm start"
+  ports:
+   - 3001:3001
+  environment:
+   MONGODB_URI: mongodb://user:pass@127.0.0.1:27017/db   
+  volumes:
+   - .:/ads-app
+ mongodb:
+  image: "mongo:latest"
+  ports:
+   - 27017:27017
+  volumes:
+   - mongodb_data_container:/data/db
+  environment:
+   USER: user
+   PASSWORD: pass
+   DB: db
+volumes:
+ mongodb_data_container:
