@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "UNLICENSED",
   "dependencies": {
     "bluebird": "3.7.2",
     "body-parser": "1.19.0",
@@ -19,7 +19,6 @@
     "helmet": "3.23.2",
     "jwks-rsa": "1.8.1",
     "mongodb": "3.5.9",
-    "mongodb-memory-server": "6.6.1",
     "morgan": "1.10.0"
   }
 }

@@ -27,7 +27,7 @@ app.use(helmet());
 app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("combined"));
-app.use(checkJwt);
+// app.use(checkJwt);
 
 app.post("/", (req, res) => {
     insertAd(req.body).then(() => {
@@ -54,11 +54,7 @@ app.delete("/:id", (req, res) => {
     });
 });
 
-startDatabase().then(() => {
-   return insertAd({title : "hello, from the in-memory database"});
-});
 
 app.listen(3001, () => {
     console.log("Listening on port 3001");
 });
-// console.log("hello world");
