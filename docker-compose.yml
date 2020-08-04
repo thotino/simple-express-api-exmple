@@ -4,6 +4,7 @@ services:
   image: node:14-alpine
   build: .
   command: sh -c "cd ads-app && npm install && npm start"
+  restart: always
   ports:
    - 3001:3001
   environment:
@@ -11,14 +12,12 @@ services:
   volumes:
    - .:/ads-app
  mongodb:
-  image: "mongo:latest"
+  image: mongo:latest
   ports:
    - 27017:27017
   volumes:
-   - mongodb_data_container:/data/db
+   - ./data:/data/db
   environment:
    USER: user
    PASSWORD: pass
    DB: db
-volumes:
- mongodb_data_container:
