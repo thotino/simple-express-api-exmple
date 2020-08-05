@@ -20,13 +20,21 @@ const secondAd = {
 const createAd = function(obj) {
     return request.postAsync({
         uri: "http://localhost:3001/",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
         json: true,
         body: obj,
     }).then((data) => {
+        console.log(data);
         return data;
     });
 };
 
 Promise.try(() => {
-    return createAd(firstAd);
+    return Promise.all([
+        createAd(firstAd),
+        createAd(secondAd),
+    ]).then(console.log);
 });

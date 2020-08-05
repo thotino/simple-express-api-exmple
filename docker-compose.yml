@@ -8,7 +8,7 @@ services:
   ports:
    - 3001:3001
   environment:
-   MONGODB_URI: mongodb://user:pass@127.0.0.1:27017/db   
+   MONGODB_URI: mongodb://127.0.0.1:27017/db   
   volumes:
    - .:/ads-app
  mongodb:
@@ -17,7 +17,3 @@ services:
    - 27017:27017
   volumes:
    - ./data:/data/db
-  environment:
-   USER: user
-   PASSWORD: pass
-   DB: db
