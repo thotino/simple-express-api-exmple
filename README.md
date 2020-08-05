@@ -20,7 +20,6 @@ npm install
 * helmet
 * jwks-rsa
 * mongodb
-* mongodb-memory-server
 * morgan
 
 # USE
