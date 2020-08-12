@@ -27,8 +27,8 @@ const createAd = function(obj) {
         json: true,
         body: obj,
     }).then((data) => {
-        console.log(data);
-        return data;
+        // console.log(data);
+        return data[1];
     });
 };
 

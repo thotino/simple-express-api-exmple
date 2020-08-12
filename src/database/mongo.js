@@ -1,18 +1,17 @@
 const Promise = global.Promise = require("bluebird");
 const { MongoClient } = require("mongodb");
 
-const mongoDBURL = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ads-DB"
 let database = null;
 
-console.log("MONGO URL : ", mongoDBURL);
-
 const startDatabase = function() {
-    // const mongo = new MongoMemoryServer();
-    return MongoClient.connect(mongoDBURL, {useNewUrlParser : true})
-        .then((connection) => { 
-            database = connection.db(); 
-            return database;
-        });
+    return Promise.try(() => {
+        const mongoDBURL = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/db"
+        return MongoClient.connect(mongoDBURL, {useNewUrlParser : true})
+            .then((connection) => { 
+                database = connection.db(); 
+                return database;
+            });
+    });    
 };
 
 const getDatabase = function() {

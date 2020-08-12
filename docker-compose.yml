@@ -1,19 +1,21 @@
-version: "3.8"
+version: "3"
 services:
  ads-app:
-  image: node:14-alpine
   build: .
-  command: sh -c "cd ads-app && npm install && npm start"
-  restart: always
+  network_mode: host
   ports:
    - 3001:3001
   environment:
+   PORT: 3001
    MONGODB_URI: mongodb://127.0.0.1:27017/db   
   volumes:
    - .:/ads-app
- mongodb:
-  image: mongo:latest
-  ports:
-   - 27017:27017
-  volumes:
-   - ./data:/data/db
+  depends_on: 
+   - mongo
+
+ mongo:
+  image: mongo
+  restart: always
+  network_mode: host
+  ports: 
+   - "27017:27017"
