@@ -30,8 +30,9 @@ app.use(morgan("combined"));
 // app.use(checkJwt);
 
 app.post("/", (req, res) => {
-    insertAd(req.body).then(() => {
-        res.send({ message : "New ad inserted" });
+    insertAd(req.body).then((insertedResult) => {
+        // res.send({ message : "New ad inserted" });
+        res.json(insertedResult);
     });
 });
 
@@ -56,6 +57,8 @@ app.delete("/:id", (req, res) => {
 
 const port = process.env.PORT || 3001;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
+module.exports = {server,}

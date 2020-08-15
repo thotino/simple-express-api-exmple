@@ -8,8 +8,10 @@ const insertAd = function(ad) {
         .then((database) => { 
             return database.collection(collectionName).insertOne(ad); 
         })
-        .then((insertedId) => { 
-            return insertedId 
+        .then((insertedData) => {            
+            const result = Object.assign(ad, {_id : insertedData.insertedId});
+            // console.log(result);
+            return result;
         });
 };
 
