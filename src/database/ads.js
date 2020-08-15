@@ -28,18 +28,24 @@ const getAds = function() {
 const deleteAd = function(id) {
     return getDatabase()
         .then((database) => { 
-            return database.collection(collectionName).deleteOne({ _id : new ObjectID(id), }); 
+            return database.collection(collectionName).findOneAndDelete({ _id : new ObjectID(id), }); 
+        }).then((data) => {
+            // console.log(data); 
+            return data;
         });
 };
 
 const updateAd = function(id, ad) {
     return getDatabase()
         .then((database) => {
-            return database.collection(collectionName).update({
+            return database.collection(collectionName).findOneAndUpdate({
                 _id : new ObjectID(id),
             }, {
                 $set: { ...ad, },
-            });
+            }, { returnOriginal: false });
+        }).then((result) => {
+            // console.log(result);
+            return result;
         });
 };
 

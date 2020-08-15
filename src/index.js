@@ -44,8 +44,10 @@ app.get("/", (req, res) => {
 });
 
 app.put("/:id", (req, res) => {
-    updateAd(req.params.id, req.body).then(() => {
-        res.send({ message : "Ad updated" });
+    updateAd(req.params.id, req.body).then((updatedResult) => {
+        console.log(updatedResult);
+        res.json(updatedResult);
+        // res.send({ message : "Ad updated" });
     });
 });
 
