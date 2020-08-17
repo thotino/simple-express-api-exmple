@@ -3,7 +3,7 @@ services:
  ads-app:
   build: .
   network_mode: host
-  command: ["npm", "start"]
+  command: ["npm", "test"]
   ports:
    - 3001:3001
   environment:
