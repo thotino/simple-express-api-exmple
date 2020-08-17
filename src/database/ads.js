@@ -10,8 +10,9 @@ const insertAd = function(ad) {
         })
         .then((insertedData) => {            
             const result = Object.assign(ad, {_id : insertedData.insertedId});
-            // console.log(result);
             return result;
+        }).catch((error) => {
+            throw error;
         });
 };
 
