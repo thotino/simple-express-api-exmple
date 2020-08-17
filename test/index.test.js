@@ -16,11 +16,11 @@ describe("Loading the app", function() {
         mailAdress: "john.doe@domain.com"
     };
 
-    before(function() {
+    this.beforeAll(function() {
         server = require("../src/index").server;
     });
 
-    after(function() {
+    this.afterAll(function() {
         server.close();
     });
 

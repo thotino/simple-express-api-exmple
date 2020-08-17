@@ -8,11 +8,23 @@ const insertAd = function(ad) {
         .then((database) => { 
             return database.collection(collectionName).insertOne(ad); 
         })
-        .then((insertedData) => {            
-            const result = Object.assign(ad, {_id : insertedData.insertedId});
-            return result;
+        .then((insertedData) => {
+            return getAd(insertedData.insertedId);
+            // return database.collection(collectionName).findOne({_id : insertedData.insertedId});           
+            // const result = Object.assign(ad, {_id : insertedData.insertedId});
+            // return result;
         }).catch((error) => {
             throw error;
+        });
+};
+
+const getAd = function(id) {
+    return getDatabase()
+        .then((database) => { 
+            return database.collection(collectionName).findOne({ _id: id });
+        }).then((data) => {
+            // console.log(data); 
+            return data;
         });
 };
 
@@ -46,7 +58,7 @@ const updateAd = function(id, ad) {
             }, { returnOriginal: false });
         }).then((result) => {
             // console.log(result);
-            return result;
+            return getAd(id);
         });
 };
 

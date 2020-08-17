@@ -4,7 +4,7 @@ const { assert } = require("chai");
 const { ObjectID } = require("mongodb");
 const adsLogic = require("../src/database/ads");
 
-describe("Loading the app", function() {
+describe("Test the app logic", function() {
     const id = new ObjectID();
     const testData = {
         _id: id,
@@ -25,46 +25,40 @@ describe("Loading the app", function() {
             .then((data) => {
                 assert.isObject(data);
                 assert.hasAllKeys(data, Object.keys(testData));
-                assert.strictEqual(data._id, testData._id);
+                assert.deepEqual(data._id, testData._id);
                 assert.strictEqual(data.mailAdress, testData.mailAdress);
             });
     });
 
-    it("gets all data from database", function() {
-        return adsLogic.getAds()
+    // it("gets all data from database", function() {
+    //     return adsLogic.getAds()
+    //         .then((data) => {
+    //             console.log(data);
+    //             assert.isArray(data);
+    //         });
+    // });
+
+    it("updates data to database", function() {
+        return adsLogic.updateAd(testData._id, {firstName: "Jane", mailAdress: "jane.doe@domain.com"})
             .then((data) => {
-                console.log(data);
-                assert.isArray(data);
+                assert.isObject(data);
+                assert.hasAllKeys(data, Object.keys(testData));
+                assert.deepEqual(data._id, testData._id);
+                assert.strictEqual(data.firstName, "Jane");
+                assert.strictEqual(data.mailAdress, "jane.doe@domain.com");
             });
     });
 
-    // it("responds 404 to GET /foo/bar", function() {
-    //     return request(server)
-    //         .get("/foo/bar")
-    //         .expect(404);
-    // });
+    it("deletes data from database", function() {
+        return adsLogic.deleteAd(testData._id)
+            .then((data) => {
+                // console.log(data);
+                assert.isObject(data);
+                assert.hasAllKeys(data, ["lastErrorObject", "value", "ok"]);
+                assert.hasAllKeys(data.value, Object.keys(testData));
+                assert.deepEqual(data.value._id, testData._id);
+            });
+    });
 
-    // it("creates the resource", function() {
-    //     return request(server)
-    //         .post("/")
-    //         .send(testData)
-    //         .set("Accept", "application/json")
-    //         .expect("Content-Type", /json/)
-    //         .expect(200)
-    //         .then((response) => {
-    //             assert.isObject(response.body);
-    //             assert.hasAllKeys(response.body, ["_id", "firstName", "lastName", "birthDate", "mailAdress"]);
-    //         });
-    // });
-
-    // it("deletes the resource", function() {
-    //     return request(server)
-    //         .delete(`/${testData._id}`)
-    //         .set("Accept", "application/json")
-    //         .expect("Content-Type", /json/)
-    //         .expect(200)
-    //         .then((response) => {
-    //             assert.isObject(response.body);
-    //         });
-    // });
+    
 });
