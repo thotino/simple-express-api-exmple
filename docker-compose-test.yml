@@ -2,21 +2,25 @@ version: "3"
 services:
  ads-app:
   build: .
-  network_mode: host
   command: ["npm", "test"]
   ports:
    - 3001:3001
   environment:
    PORT: 3001
-   MONGODB_URI: mongodb://127.0.0.1:27017/db   
+   MONGODB_URI: mongodb://mongo:27017/db   
   volumes:
    - .:/ads-app
   depends_on: 
    - mongo
+  networks: 
+    - backend
 
  mongo:
   image: mongo
   restart: always
-  network_mode: host
-  ports: 
-   - "27017:27017"
+  volumes: 
+   - ./data:/data/db
+  networks: 
+   - backend
+networks: 
+  backend:

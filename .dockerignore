@@ -1,2 +1,5 @@
 node_modules/
+test-results.xml
+.nyc_output/
+coverage/
 data/
